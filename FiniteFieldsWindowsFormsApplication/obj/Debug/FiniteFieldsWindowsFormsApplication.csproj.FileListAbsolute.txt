@@ -1,0 +1,11 @@
+\\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.exe.config
+\\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.csprojResolveAssemblyReference.cache
+\\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.MainForm.resources
+\\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.Properties.Resources.resources
+\\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.csproj.GenerateResource.Cache
+\\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.exe
+\\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.pdb
+\\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\bin\Debug\TermWork.dll
+\\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\bin\Debug\TermWork.pdb
+\\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.exe
+\\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.pdb
