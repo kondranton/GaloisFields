@@ -14,17 +14,17 @@ namespace SupportingLib
         {
             return 1 << (divisor.powerOfTheGreatestMember);
         }
-        public ulong[,] Content {
+        public int[,] Content {
             get{
                 int size = getSizeOfGaloisField();
-                ulong[,] contentArray = new ulong[size, size];
+                int[,] contentArray = new int[size, size];
                 for(uint i = 1; i<contentArray.GetUpperBound(0)+1;i++)
                     for (uint j = 1; j < contentArray.GetUpperBound(1) + 1; j++) {
  
                         Polynomial horizontalValue = new Polynomial(i);
                         Polynomial verticalValue = new Polynomial(j);
 
-                        contentArray[i, j] = (horizontalValue * verticalValue % divisor).IntegerRepresentation;
+                        contentArray[i, j] = (int)(horizontalValue * verticalValue % divisor).IntegerRepresentation;
                     }
                 return contentArray;
             }

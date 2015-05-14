@@ -3,3 +3,8 @@
 \\psf\home\documents\visual studio 2013\Projects\TermWork\TermWork\bin\Debug\TermWork.pdb
 \\psf\home\documents\visual studio 2013\Projects\TermWork\TermWork\obj\Debug\TermWork.dll
 \\psf\home\documents\visual studio 2013\Projects\TermWork\TermWork\obj\Debug\TermWork.pdb
+\\psf\Home\Desktop\galois_fields\TermWork\bin\Debug\TermWork.dll
+\\psf\Home\Desktop\galois_fields\TermWork\bin\Debug\TermWork.pdb
+\\psf\Home\Desktop\galois_fields\TermWork\obj\Debug\SupportingLib.csprojResolveAssemblyReference.cache
+\\psf\Home\Desktop\galois_fields\TermWork\obj\Debug\TermWork.dll
+\\psf\Home\Desktop\galois_fields\TermWork\obj\Debug\TermWork.pdb

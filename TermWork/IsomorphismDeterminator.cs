@@ -9,45 +9,34 @@ namespace SupportingLib
 {
     public class IsomorphismDeterminator
     {
-        public static ulong[] p;
-        public static ulong[] suitablePermutation;
-        static ulong[,] FirstTable;
-        static ulong[,] SecondTable;
+        int[,] FirstTableContent;
+        int[,] SecondTableContent;
+        PermutationGenerator PermutationGenerator;
 
-        static uint permutationLength;
-        static bool[] used;
-        public static void Determinate(int pos)
+        public int[] Determinate()
         {
-            if (pos == permutationLength)
+            int[] p = PermutationGenerator.NextPermutation();
+            while (p != null)
             {
                 bool foundSuitablePermutation = true;
-                for (ulong i = 1; i < (ulong)p.LongLength; i++)
-                    for (ulong j = i+1; j < (ulong)p.LongLength; j++)
+                p = PermutationGenerator.NextPermutation();
+                for (uint i = 1; i < p.Length; i++)
+                {
+                    for (uint j = i; j < p.Length; j++)
                     {
-                        foundSuitablePermutation &= FirstTable[p[i-1], p[j-1]] == p[SecondTable[i, j]-1];
+                        foundSuitablePermutation &= SecondTableContent[p[i], p[j]] == p[FirstTableContent[i, j]];
+                        if (!foundSuitablePermutation) break;
                     }
+                    if (!foundSuitablePermutation) break;
+                }
                 if (foundSuitablePermutation)
                 {
-                    suitablePermutation = new ulong[p.Length];
-                    Array.Copy(p, suitablePermutation, p.Length);
-         
-                }
-                return;
-            }
-            for (int i = 0; i < permutationLength; i++)
-            {
-                if (!used[i])
-                {
-                    used[i] = true;
-                    p[pos] =(uint)i+1;
-
-                    //Recursive call
-                    Determinate(pos + 1);
-
-                    p[pos] = 1; // debug only
-                    used[i] = false;
+                    return p;
                 }
             }
+
+            //Probably input was not suitable
+            throw new Exception("Перестановка не найдена. Возможно Входные данные не корректны");
         }
         public IsomorphismDeterminator(FieldTable FirstTable, FieldTable SecondTable) 
         {
@@ -55,12 +44,9 @@ namespace SupportingLib
                 throw new Exception("Степень многочленов не совпадает");
             }
 
-            IsomorphismDeterminator.FirstTable = FirstTable.Content;
-            IsomorphismDeterminator.SecondTable = SecondTable.Content;
-            p = new ulong[IsomorphismDeterminator.FirstTable.GetUpperBound(0)];
-
-            permutationLength = (uint)p.Length;
-            used = new bool[permutationLength];
+            FirstTableContent = FirstTable.Content;
+            SecondTableContent = SecondTable.Content;
+            PermutationGenerator = new PermutationGenerator(FirstTableContent.GetUpperBound(0));
         }
     }
 }

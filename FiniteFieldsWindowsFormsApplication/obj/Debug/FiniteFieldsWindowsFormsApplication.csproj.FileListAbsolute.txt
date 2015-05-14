@@ -9,3 +9,14 @@
 \\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\bin\Debug\TermWork.pdb
 \\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.exe
 \\psf\home\documents\visual studio 2013\Projects\TermWork\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.pdb
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.exe.config
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.exe
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.pdb
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.csprojResolveAssemblyReference.cache
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.MainForm.resources
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.Properties.Resources.resources
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.csproj.GenerateResource.Cache
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.exe
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.pdb
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\TermWork.dll
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\TermWork.pdb

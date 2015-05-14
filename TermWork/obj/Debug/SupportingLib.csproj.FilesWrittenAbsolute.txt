@@ -1,0 +1,5 @@
+/Users/antonkon/Desktop/galois_fields/TermWork/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/antonkon/Desktop/galois_fields/TermWork/bin/Debug/TermWork.dll.mdb
+/Users/antonkon/Desktop/galois_fields/TermWork/bin/Debug/TermWork.dll
+/Users/antonkon/Desktop/galois_fields/TermWork/obj/Debug/TermWork.dll
+/Users/antonkon/Desktop/galois_fields/TermWork/obj/Debug/TermWork.dll.mdb

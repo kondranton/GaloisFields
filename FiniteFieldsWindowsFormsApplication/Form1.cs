@@ -39,23 +39,57 @@ namespace FiniteFieldsWindowsFormsApplication
                 FieldTable table1 = new FieldTable(polynomial1);
                 FieldTable table2 = new FieldTable(polynomial2);
 
-                IsomorphismDeterminator determinator = new IsomorphismDeterminator(table1, table2);
-                IsomorphismDeterminator.Determinate(0);
+                
 
-                string outputString = "";
-                foreach (var item in IsomorphismDeterminator.suitablePermutation)
+                int[,] tableContent1 = table1.Content;
+                int[,] tableContent2 = table2.Content;
+                int size = tableContent1.GetUpperBound(0) + 1;
+
+                // Name the columns
+                for (int i = 1; i < size; i++)
                 {
-                    outputString += item.ToString();
+                    string leftTableHeaderName = tableContent1[1, i].ToString();
+                    string rightTableHeaderName = tableContent2[1, i].ToString();
+                    gridLeftTable.Columns.Add(leftTableHeaderName, leftTableHeaderName);
+                    gridRightTable.Columns.Add(rightTableHeaderName, rightTableHeaderName);
                 }
-                output.Text = outputString;
+
+                //Add rows to the tables
+                    for (int i = 2; i < size; i++)
+                    {
+                        string[] leftTableRow = new string[size];
+                        string[] rightTableRow = new string[size];
+                        for (int j = 1; j < size; j++)
+                        {
+                                leftTableRow[j-1] = tableContent1[i, j].ToString();
+                                rightTableRow[j-1] = tableContent2[i, j].ToString();
+                        }
+                        gridLeftTable.Rows.Add(leftTableRow);
+                        gridRightTable.Rows.Add(rightTableRow);
+                    }
+
+                //Determining of the sutable permutation
+                IsomorphismDeterminator determinator = new IsomorphismDeterminator(table1, table2);
+                int[] resultingPermutation = determinator.Determinate();
+
+                // Permutation output
+                string outputString = "";
+                for (int i = 1; i < resultingPermutation.Length; i++)
+                {
+                    int number = resultingPermutation[i];
+                    outputString += number.ToString();
+                }
+                    output.Text = outputString;
             }
             //}
             //catch (Exception processionException)
             //{
             //    MessageBox.Show(processionException.Message);
             //}
-           
+
 
         }
+
+
     }
 }
