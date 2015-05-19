@@ -32,10 +32,6 @@ namespace SupportingLib
                 }
             }
 
-            set
-            {
-                integerRepresentation |= ((ulong)value << position);
-            }
         }
 
         
