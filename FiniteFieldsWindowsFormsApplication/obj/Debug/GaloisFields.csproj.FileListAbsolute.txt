@@ -1,0 +1,15 @@
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.exe.config
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.exe.manifest
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.application
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.exe
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.pdb
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\TermWork.dll
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\TermWork.pdb
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.MainForm.resources
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.Properties.Resources.resources
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\GaloisFields.csproj.GenerateResource.Cache
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.exe.manifest
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.application
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.exe
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.pdb
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\GaloisFields.csprojResolveAssemblyReference.cache

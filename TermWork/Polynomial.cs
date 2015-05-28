@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SupportingLib
+namespace GF2Lib
 {
     public class Polynomial
     {
@@ -91,6 +91,10 @@ namespace SupportingLib
 
             return dividendMutatingToRemainder;
         }
+        private static Polynomial Sum(Polynomial left, Polynomial right)
+        {
+            return new Polynomial(left.IntegerRepresentation ^ right.IntegerRepresentation);
+        }
 
         /// <summary>
         /// Creates a full clone of an instance of polynomial
@@ -101,25 +105,18 @@ namespace SupportingLib
             return new Polynomial(this.IntegerRepresentation);
         }
 
-        /// <summary>
-        /// Redefinition of * operator for polynomials
-        /// </summary>
-        /// <param name="a">Left operand</param>
-        /// <param name="b">Right operand</param>
-        /// <returns>Product of polynomials</returns>
         public static Polynomial operator *(Polynomial a, Polynomial b)
         {
             return Polynomial.Multiply(a, b);
         }
-        /// <summary>
-        /// Redefinition of % operator for polynomials
-        /// </summary>
-        /// <param name="a">Left operand</param>
-        /// <param name="b">Right operand</param>
-        /// <returns>Quotient of polynomial</returns>
+
         public static Polynomial operator %(Polynomial a, Polynomial b)
         {
             return Polynomial.DivideForRemainder(a, b);
+        }
+        public static Polynomial operator +(Polynomial a, Polynomial b)
+        {
+            return Polynomial.Sum(a, b);
         }
 
         public override string ToString()

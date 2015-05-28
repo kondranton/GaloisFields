@@ -4,67 +4,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SupportingLib
+namespace GF2Lib
 {
     public class FieldTable
     {
-        public Polynomial divisor;
+        public Polynomial Divisor;
         public Pairs NeutralPairs;
 
-        private int SizeOfGaloisField
+        public enum FieldTableType
         {
-            get { return 1 << (divisor.powerOfTheGreatestMember); }
+            Addition,
+            Multiplication
         }
-        public int[,] Content() {
-                NeutralPairs = new Pairs(SizeOfGaloisField / 2 - 1);
-                int size = SizeOfGaloisField;
-                int[,] contentArray = new int[size, size];
+        public int[,] Content(FieldTableType type) {
+                NeutralPairs = new Pairs(Size / 2 - 1);
+                int[,] contentArray = new int[Size, Size];
+                //Upper triangular filling of the table
                 for(uint i = 1; i<contentArray.GetUpperBound(0)+1;i++)
                     for (uint j = i; j < contentArray.GetUpperBound(1) + 1; j++) {
- 
+
                         Polynomial horizontalValue = new Polynomial(i);
                         Polynomial verticalValue = new Polynomial(j);
 
-                        contentArray[i, j] = (int)(horizontalValue * verticalValue % divisor).IntegerRepresentation;
-                        
+                        if(type == FieldTableType.Multiplication)
+                        contentArray[i, j] = (int)(horizontalValue * verticalValue % Divisor).IntegerRepresentation;
+                        else
+                        contentArray[i, j] = (int)(horizontalValue + verticalValue % Divisor).IntegerRepresentation;
+                       
+
                     }
+
                 //Symmetric filling of the rest of the table
                 for (uint i = 1; i < contentArray.GetUpperBound(0) + 1; i++)
                     for (uint j = i + 1; j < contentArray.GetUpperBound(1) + 1; j++)
-                    { 
+                    {
                         if (contentArray[i, j] == 1) NeutralPairs.AddPair(i, j);
                         contentArray[j, i] = contentArray[i, j];
                     }
-                        
-
                 return contentArray;
         }
-
-        
-
-        public FieldTable(Polynomial polynomialForTable) 
+        public int Size
         {
-            this.divisor = polynomialForTable;
-           
+            get { return 1 << (Divisor.powerOfTheGreatestMember); }
         }
-        public int Size{
-            get {
-               return SizeOfGaloisField;
-            }
-    }
-        public string[] ToStrings()
+
+        public FieldTable(Polynomial polynomialForTable)
         {
-            string[] printableArray = new string[Content().GetUpperBound(0)];
-            for (int i = 1; i< Content().GetUpperBound(0)+1; i++){
-                string line = "";
-                for (int j = 1; j < Content().GetUpperBound(1) + 1; j++)
-                {
-                    line += String.Format("{0,3} ", Content()[i, j]);
-                }
-                printableArray[i - 1] = line;
-            }
-            return printableArray;
+            this.Divisor = polynomialForTable;
+
         }
+
     }
     public class Pairs
     {
@@ -76,16 +65,23 @@ namespace SupportingLib
         }
         public void AddPair(uint item1, uint item2)
         {
-            PairArray[spareItemIndex++] = new Tuple<uint,uint>(item1,item2);
-        }
-        public int Length
-        {
-            get { return PairArray.Length; }
+            if (!this.IsFull)
+            {
+                PairArray[spareItemIndex++] = new Tuple<uint, uint>(item1, item2);
+            }
         }
         public void SwapValuesAtIndex(int index)
         {
             Tuple<uint,uint> chosenPair = PairArray[index];
             PairArray[index] = new Tuple<uint,uint>(chosenPair.Item2,chosenPair.Item1);
+        }
+        public bool IsFull
+        {
+            get { return PairArray[Length - 1] != null; }
+        }
+          public int Length
+        {
+            get { return PairArray.Length; }
         }
         public Tuple<uint, uint> this[int i]
         {

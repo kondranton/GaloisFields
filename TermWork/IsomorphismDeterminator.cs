@@ -3,50 +3,100 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SupportingLib;
+using GF2Lib;
 
-namespace SupportingLib
+namespace GF2Lib
 {
     public class IsomorphismDeterminator
     {
-        int[,] _table1;
-        int[,] _table2;
-        PermutationGenerator _permutationGenerator;
+        private int[,] table1product;
+        private int[,] table2product;
+        private int[,] table1sum;
+        private int[,] table2sum;
 
-        public delegate void ProgressDelegate(int currentValue, int totalValue);
+        private PermutationGenerator permutationGenerator;
+        private long permutationsChecked = 0;
+        public bool CancelationRequested;
+
+
+        public delegate void ProgressDelegate(long currentValue, long totalValue);
         public event ProgressDelegate ProgressChanged;
 
-        public string Determinate()
+        public string Determine()
         {
-            int[] p = _permutationGenerator.NextPermutation();
-            
+            int[] p = permutationGenerator.NextPermutation();
+
             while (p != null)
             {
-                bool permutationSuits = true;
-                if(p != null)
-                for (uint i = 1; i < p.Length; i++)
+                if (!CancelationRequested)
                 {
-                    for (uint j = i; j < p.Length; j++)
-                    {
-                        permutationSuits &= _table2[p[i], p[j]] == p[_table1[i, j]];
-                        if (!permutationSuits) break;
-                    }
+                    bool permutationSuits = true;
+                    if (p != null)
+                        for (uint i = 1; i < p.Length; i++)
+                        {
+                            for (uint j = i; j < p.Length; j++)
+                            {
+                                permutationSuits &= table2product[p[i], p[j]] == p[table1product[i, j]];
+                                permutationSuits &= table2sum[p[i], p[j]] == p[table1sum[i, j]];
+                                if (!permutationSuits) break;
+                            }
 
-                    if (!permutationSuits) break;
+                            if (!permutationSuits) break;
+                        }
+                    if (permutationSuits)
+                    {
+                        return stringFromPermutation(p);
+                    }
+                    ProgressChanged(++permutationsChecked, permutationGenerator.PossiblePermutationQuantity);
+                    p = permutationGenerator.NextPermutation();
                 }
-                if (permutationSuits)
+                else
                 {
-                    return _stringFromPermutation(p);
+                    return "Операция отменена";
                 }
-                ProgressChanged(1, p.Length);
-                p = _permutationGenerator.NextPermutation();
             };
 
             //Probably input was not suitable
-           // throw new Exception("Перестановка не найдена. Возможно входные данные не корректны");
-            return "Нет результата";
+           throw new Exception("Перестановка не найдена. Возможно входные данные не корректны");
         }
-        private string _stringFromPermutation(int[] permutation)
+        public string[] DetermineAll()
+        {
+            List<string> result = new List<string>();
+            int[] p = permutationGenerator.NextPermutation();
+
+            while (p != null)
+            {
+                if (!CancelationRequested)
+                {
+                    bool permutationSuits = true;
+                    if (p != null)
+                        for (uint i = 1; i < p.Length; i++)
+                        {
+                            for (uint j = i; j < p.Length; j++)
+                            {
+                                permutationSuits &= table2product[p[i], p[j]] == p[table1product[i, j]];
+                                permutationSuits &= table2sum[p[i], p[j]] == p[table1sum[i, j]];
+                                if (!permutationSuits) break;
+                            }
+
+                            if (!permutationSuits) break;
+                        }
+                    if (permutationSuits)
+                    {
+                        result.Add(stringFromPermutation(p));
+                    }
+                    ProgressChanged(++permutationsChecked, permutationGenerator.PossiblePermutationQuantity);
+                    p = permutationGenerator.NextPermutation();
+                }
+                else
+                {
+                    return result.ToArray();
+                }
+            };
+
+            return result.ToArray();
+        }
+        private string stringFromPermutation(int[] permutation)
         {
             string outputString = "";
             for (int i = 1; i < permutation.Length; i++)
@@ -56,16 +106,18 @@ namespace SupportingLib
             }
             return outputString;
         }
-        public IsomorphismDeterminator(FieldTable Table1, FieldTable Table2) 
+        public IsomorphismDeterminator(FieldTable Table1, FieldTable Table2)
         {
             if (Table1.Size != Table2.Size) {
                 throw new Exception("Степень многочленов не совпадает");
             }
 
-            _table1 = Table1.Content();
-            _table2 = Table2.Content();
-            _permutationGenerator = new PermutationGenerator(_table1.GetUpperBound(0),Table1.NeutralPairs, Table2.NeutralPairs);
+            table1product = Table1.Content(FieldTable.FieldTableType.Multiplication);
+            table2product = Table2.Content(FieldTable.FieldTableType.Multiplication);
+            table1sum = Table1.Content(FieldTable.FieldTableType.Addition);
+            table2sum = Table2.Content(FieldTable.FieldTableType.Addition);
+           
+            permutationGenerator = new PermutationGenerator(table1product.GetUpperBound(0),Table1.NeutralPairs, Table2.NeutralPairs);
         }
     }
 }
- 

@@ -20,3 +20,7 @@
 \\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.pdb
 \\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\TermWork.dll
 \\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\TermWork.pdb
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.exe.manifest
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\bin\Debug\FiniteFieldsWindowsFormsApplication.application
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.exe.manifest
+\\psf\Home\Desktop\galois_fields\FiniteFieldsWindowsFormsApplication\obj\Debug\FiniteFieldsWindowsFormsApplication.application

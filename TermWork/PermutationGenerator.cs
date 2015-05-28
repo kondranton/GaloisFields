@@ -4,86 +4,89 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SupportingLib
+namespace GF2Lib
 {
     public class PermutationGenerator
     {
 
-        private int[] _p;
-        private int _permutationLength;
-        private int _inversions;
-        private Pairs _pairs1;
-        private Pairs _pairs2;
-        private int[] _indexArray;
+        private int[] p;
+        private int permutationLength;
+        private int inversions;
+        private Pairs pairs1;
+        private Pairs pairs2;
+        private int[] indexArray;
+        public long PossiblePermutationQuantity;
 
-        private void _swapValues(int a, int b, int[] array)
+        private int[] iterate()
+        {
+            if (p == null)
+            {
+                initializePermutation();
+                updatePermutation();
+                return p;
+            }//There is no permutation yet
+
+                //Previous permutation exists
+                for (int i = indexArray.Length - 1; i > 0; i--)
+                {
+                    if (inOrder(indexArray[i - 1], indexArray[i]))
+                    {
+                        int tearingNumberIndex = i-1;
+
+                        //Reorder the tail of permutation
+                        int startingIndex = tearingNumberIndex + 1;
+                        int sortingLength = indexArray.Length - tearingNumberIndex - 1;
+                        Array.Sort(indexArray, startingIndex, sortingLength);
+
+                        //Search for the number to swap with tearing number
+                        for (int j = tearingNumberIndex; j < indexArray.Length; j++)
+                        {
+                            //The number should be greater than tearing
+                            if (inOrder(indexArray[tearingNumberIndex], indexArray[j]))
+                            {
+                                swapValues(tearingNumberIndex, j, indexArray);
+                                break;
+                            }
+                        }
+                        updatePermutation();
+                        return p;
+                    }
+                }
+                int inversionIndex = nextInversionIndex();
+                if (inversions == 2 << (permutationLength / 2 - 1))
+                    return null; //There is no suitable permutations left
+
+                pairs1.SwapValuesAtIndex(inversionIndex);
+                resetIndexArray();
+                updatePermutation();
+                return p;
+        }
+        private void swapValues(int a, int b, int[] array)
         {
             int c = array[a];
             array[a] = array[b];
             array[b] = c;
         }
-        private bool _inOrder(int left, int right)
+        private bool inOrder(int left, int right)
         {
             return left < right;
         }
-        private int[] _iterate()
+        private int nextInversionIndex()
         {
-            if (_p == null)
-            {
-                _initializePermutation();
-                _updatePermutation();
-                return _p;
-            }//There is no permutation yet
-
-                //Previous permutation exists
-                for (int i = _indexArray.Length - 1; i > 0; i--)
-                {
-                    if (_inOrder(_indexArray[i - 1], _indexArray[i]))
-                    {
-                        int tearingNumberIndex = i-1;
-
-                        //Reorder the tail
-                        Array.Sort(_indexArray, tearingNumberIndex + 1, _indexArray.Length - tearingNumberIndex - 1);
-
-                        //Search for the number to swap with tearing number
-                        for (int j = tearingNumberIndex; j < _indexArray.Length; j++)
-                        {
-                            //The number should be greater than tearing
-                            if (_inOrder(_indexArray[tearingNumberIndex], _indexArray[j]))
-                            {
-                                _swapValues(tearingNumberIndex, j, _indexArray);
-                                break;
-                            }
-                        }
-                        _updatePermutation();
-                        return _p;
-                    }
-                }
-                    int inversionIndex = _nextInversionIndex();
-                    if (_inversions == 2 << (_permutationLength / 2 - 1))
-                        return null; //There is no suitable permutations left
-
-                    _pairs1.SwapValuesAtIndex(inversionIndex);
-                    _resetIndexArray();
-                    _updatePermutation();
-                    return _p;
+            int previousInversions = inversions++;
+            return indexOfFlag(inversions, previousInversions);
         }
-        private int _nextInversionIndex()
-        {
-            int previousInversions = _inversions++;
-            return _indexOfFlag(_inversions, previousInversions);
-        }
-        private int _indexOfFlag(int minuend, int subtrahend)
+        private int indexOfFlag(int minuend, int subtrahend)
         {
             for (int i = 0; i < 16; i++)
             {
-                if (_flagAtPosition(i, minuend))
-                    if (!_flagAtPosition(i, subtrahend))
+                if (flagAtPosition(i, minuend))
+                    if (!flagAtPosition(i, subtrahend))
                         return i;
             }
             return -1;
         }
-        private bool _flagAtPosition(int position, int flagKeeper)
+        private bool flagAtPosition(int position, int flagKeeper)
         {
             if ((flagKeeper | (1 << position)) == flagKeeper)
             {
@@ -94,36 +97,46 @@ namespace SupportingLib
                 return false;
             }
         }
-        private void _updatePermutation()
+        private void updatePermutation()
         {
-            for (int i = 0; i < _pairs1.Length; i++)
+            for (int i = 0; i < pairs1.Length; i++)
             {
-                _p[_pairs1[_indexArray[i]].Item1] = (int)_pairs2[i].Item1;
-                _p[_pairs1[_indexArray[i]].Item2] = (int)_pairs2[i].Item2;
+                p[pairs1[indexArray[i]].Item1] = (int)pairs2[i].Item1;
+                p[pairs1[indexArray[i]].Item2] = (int)pairs2[i].Item2;
             }
         }
-        private void _initializePermutation()
+        private void initializePermutation()
         {
-            _p = new int[_permutationLength + 1];
-            for (int i = 1; i < _p.Length; i++) _p[i] = i;
-            _resetIndexArray();
+            p = new int[permutationLength + 1];
+            for (int i = 1; i < p.Length; i++) p[i] = i;
+            resetIndexArray();
         }
-        private void _resetIndexArray()
+        private void resetIndexArray()
         {
-            for (int i = 0; i < _indexArray.Length; i++) _indexArray[i] = i;
+            for (int i = 0; i < indexArray.Length; i++) indexArray[i] = i;
+        }
+        private long factorial(long fact)
+        {
+            if (fact == 1) return 1;
+            return factorial(fact - 1) * fact;
         }
         public int[] NextPermutation()
         {
-            return _iterate();
+            return iterate();
         }
        
-        public PermutationGenerator( int permutationLength , Pairs pairs1, Pairs pairs2)
+        public PermutationGenerator(int permutationLength , Pairs pairs1, Pairs pairs2)
         {
-            _pairs1 = pairs1;
-            _pairs2 = pairs2;
-            _indexArray = new int[pairs1.Length];
-            _inversions = 0;
-            this._permutationLength = permutationLength;
+            if (!pairs1.IsFull || !pairs2.IsFull) throw new Exception("Введенные многочлены не являются неприводимыми.");
+            this.pairs1 = pairs1;
+            this.pairs2 = pairs2;
+            indexArray = new int[pairs1.Length];
+            inversions = 0;
+            this.permutationLength = permutationLength;
+            unchecked 
+            { 
+                PossiblePermutationQuantity = (2 << (permutationLength / 2 - 1))*factorial((permutationLength / 2));
+            }
         }
     }
 }
