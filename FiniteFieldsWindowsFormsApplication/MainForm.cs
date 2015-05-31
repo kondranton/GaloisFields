@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GF2Lib;
+using System.Collections.Generic;
 
 namespace FiniteFieldsWindowsFormsApplication
 {
@@ -50,8 +51,14 @@ namespace FiniteFieldsWindowsFormsApplication
         {
             radioButtonDemoMode.Enabled = state;
             radioButtonStandardMode.Enabled = state;
+            inputEnabled(state);
             checkBoxFindAll.Enabled = state;
             cancelationRequested = state;
+        }
+        private void inputEnabled(bool state)
+        {
+            firstValueTextBox.Enabled = state;
+            secondValueTextBox.Enabled = state;
         }
         async private void performCalculationsAsync()
         {
@@ -64,13 +71,13 @@ namespace FiniteFieldsWindowsFormsApplication
 
                 if (demoModeIsOn)
                 {
-                    int[,] tableContentMult1 = table1.Content(FieldTable.FieldTableType.Multiplication);
-                    int[,] tableContentMult2 = table2.Content(FieldTable.FieldTableType.Multiplication);
-                    int[,] tableContentAdd = table1.Content(FieldTable.FieldTableType.Addition);
+                        int[,] tableContentMult1 = table1.Content(FieldTable.FieldTableType.Multiplication);
+                        int[,] tableContentMult2 = table2.Content(FieldTable.FieldTableType.Multiplication);
+                        int[,] tableContentAdd = table1.Content(FieldTable.FieldTableType.Addition);
 
-                    fillGrid(gridLeftTable,tableContentMult1);
-                    fillGrid(gridRightTable,tableContentMult2);
-                    fillGrid(gridBottomTable,tableContentAdd);
+                        fillGrid(gridLeftTable, tableContentMult1);
+                        fillGrid(gridRightTable, tableContentMult2);
+                        fillGrid(gridBottomTable, tableContentAdd);
                 }
 
 
@@ -87,16 +94,29 @@ namespace FiniteFieldsWindowsFormsApplication
                     };
                 if (checkBoxFindAll.Checked) 
                 {
-                    string[] resultingPermutations = await Task.Run(() => determinator.DetermineAll());
-                    output.Lines = resultingPermutations;
+                List<string> result = new List<string>();
+                string next = await Task.Run(() => determinator.Determine());
+                while (next != null && next != IsomorphismDeterminator.CANCELLATION_TOKEN)
+                {
+                    output.Text += "\n" + next;
+                    await Task.Run(() =>
+                    {
+                        next = determinator.Determine();
+                    });
+                    
+                }
+                    if(next == IsomorphismDeterminator.CANCELLATION_TOKEN)
+                    {
+                       string[] temp =  output.Lines;
+                       temp[0] = next;
+                       output.Lines = temp;
+                    }
                 }
                 else
                 {
                     string resultingPermutation = await Task.Run(() => determinator.Determine());
                     output.Text = resultingPermutation;
                 }
-              
-               
             }
             catch (OverflowException)
             {
@@ -137,7 +157,7 @@ namespace FiniteFieldsWindowsFormsApplication
                     row[j - 2] = content[i, j].ToString();
                 }
                 grid.Rows.Add(row);
-                grid.Rows[i - 2].HeaderCell.Value = i.ToString();
+                grid.Rows[i - 2].HeaderCell.Value = content[1, i].ToString();
             }
         }
         bool formIsMaximized = true;
@@ -149,7 +169,7 @@ namespace FiniteFieldsWindowsFormsApplication
                 formIsMaximized = false;
                 changeFormHeight(false);
             }
-            setInputState(true);
+            inputEnabled(true);
         }
 
         private void radioButtonDemoMode_CheckedChanged(object sender, EventArgs e)
@@ -164,13 +184,7 @@ namespace FiniteFieldsWindowsFormsApplication
             int demoValue2 = 13;
             firstValueTextBox.Text = demoValue1.ToString();
             secondValueTextBox.Text = demoValue2.ToString();
-            setInputState(false);
-        }
-
-        private void setInputState(bool state)
-        {
-            firstValueTextBox.Enabled = state;
-            secondValueTextBox.Enabled = state;
+            inputEnabled(false);
         }
 
         private void changeFormHeight(bool increase)

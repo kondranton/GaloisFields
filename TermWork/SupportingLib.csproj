@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="IOManager.cs" />
     <Compile Include="IsomorphismDeterminator.cs" />
+    <Compile Include="Pairs.cs" />
     <Compile Include="PermutationGenerator.cs" />
     <Compile Include="Polynomial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

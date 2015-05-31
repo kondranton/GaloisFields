@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="FiniteFieldsWindowsFormsApplication.exe" version="1.0.0.5" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="FiniteFieldsWindowsFormsApplication.exe" version="1.0.0.6" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="Double-J-Design-Ravenna-3d-Database-Table.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -43,26 +43,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FiniteFieldsWindowsFormsApplication.exe" size="410608">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FiniteFieldsWindowsFormsApplication.exe" size="411120">
       <assemblyIdentity name="FiniteFieldsWindowsFormsApplication" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>mKhCS7VaL1QWsiPGPEHuVoFJ+r8JULePYHHNtE0wDgw=</dsig:DigestValue>
+        <dsig:DigestValue>Gt2UDcCN/2roWP+vAp2u9m0GbsAhCt4z7f+SKryF79w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TermWork.dll" size="13312">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TermWork.dll" size="12288">
       <assemblyIdentity name="TermWork" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MTMY6EGl7S31q24XtzLF2wQki8N0A6SWRn/hgCOiqTY=</dsig:DigestValue>
+        <dsig:DigestValue>C2x/HYvxwGkC3/W5HDWdsymrZTC2nMjVhysqL2t64fk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

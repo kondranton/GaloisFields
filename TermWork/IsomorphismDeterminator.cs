@@ -9,6 +9,8 @@ namespace GF2Lib
 {
     public class IsomorphismDeterminator
     {
+        public const string CANCELLATION_TOKEN = "Операция отменена";
+
         private int[,] table1product;
         private int[,] table2product;
         private int[,] table1sum;
@@ -43,59 +45,22 @@ namespace GF2Lib
 
                             if (!permutationSuits) break;
                         }
+
+                    ProgressChanged(++permutationsChecked, permutationGenerator.PossiblePermutationQuantity);
                     if (permutationSuits)
                     {
                         return stringFromPermutation(p);
                     }
-                    ProgressChanged(++permutationsChecked, permutationGenerator.PossiblePermutationQuantity);
                     p = permutationGenerator.NextPermutation();
                 }
                 else
                 {
-                    return "Операция отменена";
+                    return CANCELLATION_TOKEN;
                 }
             };
-
-            //Probably input was not suitable
-           throw new Exception("Перестановка не найдена. Возможно входные данные не корректны");
+            return null;
         }
-        public string[] DetermineAll()
-        {
-            List<string> result = new List<string>();
-            int[] p = permutationGenerator.NextPermutation();
 
-            while (p != null)
-            {
-                if (!CancelationRequested)
-                {
-                    bool permutationSuits = true;
-                    if (p != null)
-                        for (uint i = 1; i < p.Length; i++)
-                        {
-                            for (uint j = i; j < p.Length; j++)
-                            {
-                                permutationSuits &= table2product[p[i], p[j]] == p[table1product[i, j]];
-                                permutationSuits &= table2sum[p[i], p[j]] == p[table1sum[i, j]];
-                                if (!permutationSuits) break;
-                            }
-
-                            if (!permutationSuits) break;
-                        }
-                    if (permutationSuits)
-                    {
-                        result.Add(stringFromPermutation(p));
-                    }
-                    ProgressChanged(++permutationsChecked, permutationGenerator.PossiblePermutationQuantity);
-                    p = permutationGenerator.NextPermutation();
-                }
-                else
-                {
-                    return result.ToArray();
-                }
-            };
-
-            return result.ToArray();
-        }
         private string stringFromPermutation(int[] permutation)
         {
             string outputString = "";
@@ -108,7 +73,8 @@ namespace GF2Lib
         }
         public IsomorphismDeterminator(FieldTable Table1, FieldTable Table2)
         {
-            if (Table1.Size != Table2.Size) {
+            if (Table1.Size != Table2.Size)
+            {
                 throw new Exception("Степень многочленов не совпадает");
             }
 
@@ -116,8 +82,8 @@ namespace GF2Lib
             table2product = Table2.Content(FieldTable.FieldTableType.Multiplication);
             table1sum = Table1.Content(FieldTable.FieldTableType.Addition);
             table2sum = Table2.Content(FieldTable.FieldTableType.Addition);
-           
-            permutationGenerator = new PermutationGenerator(table1product.GetUpperBound(0),Table1.NeutralPairs, Table2.NeutralPairs);
+
+            permutationGenerator = new PermutationGenerator(table1product.GetUpperBound(0), Table1.NeutralPairs, Table2.NeutralPairs);
         }
     }
 }

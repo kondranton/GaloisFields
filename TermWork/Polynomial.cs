@@ -16,7 +16,6 @@ namespace GF2Lib
         {
             this.integerRepresentation = integerRepresentation;
         }
-        public Polynomial() : this(0) { }
 
         private int this[int position]
         {
@@ -33,8 +32,6 @@ namespace GF2Lib
             }
 
         }
-
-        
         public int powerOfTheGreatestMember
         {
             get
@@ -47,7 +44,6 @@ namespace GF2Lib
                 return power;
             }
         }
-
         public ulong IntegerRepresentation
         {
             get { return integerRepresentation; }
@@ -96,10 +92,6 @@ namespace GF2Lib
             return new Polynomial(left.IntegerRepresentation ^ right.IntegerRepresentation);
         }
 
-        /// <summary>
-        /// Creates a full clone of an instance of polynomial
-        /// </summary>
-        /// <returns></returns>
         public Polynomial Clone()
         {
             return new Polynomial(this.IntegerRepresentation);
@@ -118,7 +110,6 @@ namespace GF2Lib
         {
             return Polynomial.Sum(a, b);
         }
-
         public override string ToString()
         {
             return string.Format("{0}", integerRepresentation);
